@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,9 +81,18 @@ public class MainActivity extends AppCompatActivity {
         int buttonPressed = view.getId();
 
         if(buttonPressed == R.id.buttonEq){
-            String s1 = "";
-            s1 += resultText.getText();
-            data02 = Double.valueOf(s1);
+            String temp = resultText.getText().toString();
+            int i;
+            for(i = 0; i < temp.length(); i++){
+                if((!Character.isDigit(temp.charAt(i))) && !(temp.charAt(i) == '.')){
+                    i++;
+                    break;
+                }
+            }
+            
+            
+            String s = temp.substring(i);
+            data02 = Double.valueOf(s);
             double result = 0;
 
             if(opp == Operator.div){
@@ -102,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             String s = "";
             s += resultText.getText();
             data01 = Double.valueOf(s);
+            String temp = Double.toString(data01);
 
             if (buttonPressed == R.id.buttonDiv) {
                 opp = Operator.div;
